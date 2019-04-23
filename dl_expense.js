@@ -36,7 +36,7 @@ window.addEventListener("load", function () {
     var changingCells = document.querySelectorAll("#travelExp input.sum");
     //Looping through chaging cells and changing to CalcExp function.
     for (var i = 0; i < changingCells.length; i++) {
-        changingCells[i].addEventListener("change", calcExp());
+        changingCells[i].addEventListener("change", calcExp);
     }
     //Every time the button with the id of submit button is clicked the validateSummary function will be ran. 
     document.getElementById("submitButton").addEventListener("click", validateSummary);
@@ -44,7 +44,7 @@ window.addEventListener("load", function () {
 //The purpose of the function is display a custom message to the user. 
 function validateSummary() {
     // if the input with the id of summary is missing a value then the messge "You must include a summary of the trip in your report." will show up.
-    if (document.getElementById("summary").validity.missingValue) {
+    if (document.getElementById("summary").validity.valueMissing) {
         document.getElementById("summary").setCustomValidity("You must include a summary of the trip in your report.");
         //if not missing any values, then there will not have any message and the message will not appear. 
     } else {
@@ -68,9 +68,12 @@ function calcClass(sumClass) {
     //returning the value of sumTotal 
     return sumTotal;
 }
-
+//Calculates the travel expenses from all categories and dates. 
 function calcExp() {
-
+    var expTable = document.querySelectorAll("#travelExp tbody tr");
+    for (var i = 0; i < expTable.length; i++) {
+        expTable[i].querySelector("input#index" + i).values = formatNumber(calcClass("date" + i), 2)
+    }
 }
 
 
