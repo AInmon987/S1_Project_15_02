@@ -39,7 +39,7 @@ window.addEventListener("load", function () {
         changingCells[i].addEventListener("change", calcExp);
     }
     //Every time the button with the id of submit button is clicked the validateSummary function will be ran. 
-    document.getElementById("submitButton").addEventListener("click", validateSummary);
+    document.getElementById("submitButton").onclick = validateSummary;
 });
 //The purpose of the function is display a custom message to the user. 
 function validateSummary() {
@@ -59,10 +59,10 @@ function calcClass(sumClass) {
     var sumTotal = 0;
 
     for (var i = 0; i < sumFields.length; i++) {
-        var itemValue = parseFloat(sumFields[i])
+        var itemValue = parseFloat(sumFields[i].value)
         //If itemValue is not a number than its false
         if (isNaN(itemValue) === false) {
-            sumTotal + itemValue;
+            sumTotal += itemValue;
         }
     }
     //returning the value of sumTotal 
@@ -71,9 +71,16 @@ function calcClass(sumClass) {
 //Calculates the travel expenses from all categories and dates. 
 function calcExp() {
     var expTable = document.querySelectorAll("#travelExp tbody tr");
+    //looping through each id of subtotal and getting the value and setting them on the page.
     for (var i = 0; i < expTable.length; i++) {
-        expTable[i].querySelector("input#index" + i).values = formatNumber(calcClass("date" + i), 2)
+        expTable[i].querySelector("input#subtotal" + i).value = formatNumber(calcClass("date" + i), 2);
     }
+    //Keeps tracks of each catorgory. 
+    document.getElementById("transTotal").value = formatNumber(calcClass("trans"), 2);
+    document.getElementById("lodgeTotal").value = formatNumber(calcClass("lodge"), 2);
+    document.getElementById("mealTotal").value = formatNumber(calcClass("meal"), 2);
+    document.getElementById("otherTotal").value = formatNumber(calcClass("other"), 2);
+    document.getElementById("expTotal").value = formatUSCurrency(calcClass("sum"), 2);
 }
 
 
