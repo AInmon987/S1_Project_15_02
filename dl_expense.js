@@ -27,7 +27,7 @@
       by "decimals", adding thousands separators.
       
    formatUSCurrency(val)
-      Formats the value, "val", as U.S. currency.
+      Formats the value, "val", as U.S. currency.hi
       
 */
 //Loading an anonymous When the page is fully laoded. 
